@@ -1,0 +1,37 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+
+.section-game {
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  place-items: center;
+}
+
+.gameboard {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  place-items: center;
+}
+
+.tile {
+  box-sizing: border-box;
+  height: 100px;
+  width: 100px;
+  background-color: rgb(167, 167, 167);
+  /* border: 1px solid black; */
+  background-size: cover;
+}
+
+.tile-type-wall {
+  background-image: url(./images/wall.png);
+}
+
+.tile-type-path {
+  background-image: url(./images/paving-white.png);
+}
