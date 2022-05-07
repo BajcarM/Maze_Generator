@@ -15,23 +15,31 @@ body {
 
 .gameboard {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(67, 1fr);
   place-items: center;
 }
 
 .tile {
   box-sizing: border-box;
-  height: 100px;
-  width: 100px;
+  height: 20px;
+  width: 20px;
   background-color: rgb(167, 167, 167);
   /* border: 1px solid black; */
   background-size: cover;
 }
 
-.tile-type-wall {
+.tile-wall {
   background-image: url(./images/wall.png);
 }
 
-.tile-type-path {
+.tile-path {
   background-image: url(./images/paving-white.png);
+}
+
+.tile-drill-head{
+    background-color: rgb(45, 45, 45);
+}
+
+.tile-drill-tail{
+    background-color: rgb(113, 113, 113);
 }

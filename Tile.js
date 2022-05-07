@@ -8,22 +8,13 @@ export default class Tile {
     ).innerHTML += `<div class="tile" data-id="${this.id}"></div>`;
   }
 
-  switchTo(type) {
+  switchTo = (type) => {
     const tile = document.querySelector(`[data-id="${this.id}"]`);
 
-    switch (type) {
-      case "wall":
-        this.wall = true;
-        tile.classList.remove("tile-type-path");
-        tile.classList.add("tile-type-wall");
-        break;
-      case "path":
-        this.wall = false;
-        tile.classList.remove("tile-type-wall");
-        tile.classList.add("tile-type-path");
-        break;
-    }
-  }
+    tile.className = `tile tile-${type}`;
+
+    type === "wall" ? (this.wall = true) : (this.wall = false);
+  };
 
   revealYourself(arg) {
     let iAmCheese = false;
@@ -32,6 +23,7 @@ export default class Tile {
       case undefined:
         console.log("null");
         break;
+
       case "youAreCheese":
         iAmCheese = true;
         console.log(iAmCheese);

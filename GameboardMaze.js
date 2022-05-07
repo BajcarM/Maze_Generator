@@ -20,27 +20,71 @@ export default class GameboardMaze {
     });
   }
 
-  createRandomMaze() {
-    // function frameWalls(entryTileId) {
-    //   const frameWalls = this.tilesArray.filter((tile) => {
-    //     return (
-    //       tile.id < this.colsCount ||
-    //       tile.id > this.colsCount * (this.rowsCount - 1) ||
-    //       tile.id % this.colsCount === 0 ||
-    //       tile.id % this.colsCount === this.colsCount - 1
-    //     );
-    //   });
+  createRandomMaze = () => {
+    let remainingTiles = [];
 
-    const remainingTiles = [];
     for (let row = 1; row < this.rowsCount; row += 2) {
       for (let col = 1; col < this.colsCount; col += 2) {
-        let id = row * this.colsCount + col;
+        const id = row * this.colsCount + col;
 
-        remainingTiles.push(this.tilesArray[id]);
+        remainingTiles.push(id);
       }
     }
-    remainingTiles.forEach((tile) => {
-      tile.switchTo("path");
-    });
-  }
+
+
+
+    const stackTiles = [remainingTiles[0]];
+
+    let drill = setInterval(() => {
+      console.log(stackTiles);
+
+      const currentTile = stackTiles.pop();
+
+      this.tilesArray[currentTile].switchTo("drill-head");
+
+      const possibleMoves = remainingTiles.reduce((acc, tile) => {
+        if (
+          tile === currentTile + 2 ||
+          tile === currentTile - 2 ||
+          tile === currentTile + 2 * this.colsCount ||
+          tile === currentTile - 2 * this.colsCount
+        ) {
+          acc.push(tile);
+        }
+
+        return acc;
+      }, []);
+
+      if (possibleMoves.length > 0) {
+        const randomMove = Math.floor(Math.random() * possibleMoves.length);
+        const nextMove = possibleMoves[randomMove];
+        const wallBetween = (currentTile + possibleMoves[randomMove]) / 2;
+
+        stackTiles.push(currentTile);
+        stackTiles.push(nextMove);
+
+        remainingTiles = remainingTiles.filter((tile) => {
+          return tile !== nextMove;
+        });
+
+        this.tilesArray[nextMove].switchTo("drill-head");
+        this.tilesArray[wallBetween].switchTo("drill-tail");
+        this.tilesArray[currentTile].switchTo("drill-tail");
+      } else {
+        const wallBetween =
+          (currentTile + stackTiles[stackTiles.length - 1]) / 2;
+
+        this.tilesArray[currentTile].switchTo("path");
+        if (wallBetween) {
+          this.tilesArray[wallBetween].switchTo("path");
+        }
+      }
+
+      if (stackTiles.length === 0) {
+        clearInterval(drill);
+      }
+    }, 50);
+
+    this.tilesArray[this.colsCount].switchTo('path')
+  };
 }
