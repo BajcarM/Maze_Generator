@@ -1,3 +1,4 @@
+import Controls from "./Controls.js";
 import Tile from "./Tile.js";
 
 export default class GameboardMaze {
@@ -8,7 +9,8 @@ export default class GameboardMaze {
     this.width = width;
 
     this.tilesArray = [];
-    this.working = false;
+
+    this.controls = null;
 
     document.querySelector(".gameboard").innerHTML = "";
 
@@ -22,7 +24,7 @@ export default class GameboardMaze {
   }
 
   createRandomMaze = () => {
-    this.working = true;
+    this.controls.gameboardIsReady("working");
     this.tilesArray.forEach((tile) => {
       tile.switchTo("wall");
     });
@@ -83,7 +85,7 @@ export default class GameboardMaze {
 
       if (stackTiles.length === 0) {
         clearInterval(drill);
-        this.working = false;
+        this.controls.gameboardIsReady("ready");
       }
     }, 50);
 

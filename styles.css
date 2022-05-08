@@ -36,10 +36,22 @@ body {
   background-image: url(./images/paving-white.png);
 }
 
-.tile-drill-head{
-    background-color: rgb(41, 41, 41);
+.tile-drill-head {
+  background-color: rgb(41, 41, 41);
 }
 
-.tile-drill-tail{
-    background-color: rgb(74, 74, 74);
+.tile-drill-tail {
+  background-color: rgb(74, 74, 74);
+}
+
+button {
+  background-color: rgb(65, 255, 65);
+  width: 100px;
+  height: 50px;
+}
+
+.button-working {
+  border: none;
+  background-color: rgb(255, 82, 82);
+  
 }

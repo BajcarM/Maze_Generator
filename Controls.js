@@ -3,6 +3,9 @@ export default class Controls {
     this.targetGameboard = targetGameboard;
 
     this.buttons = ["start"];
+    this.gameboardReady = true;
+
+    this.targetGameboard.controls = this;
 
     document.querySelector(".control-panel").innerHTML = this.buttons
       .map((button) => {
@@ -16,9 +19,22 @@ export default class Controls {
       .join("");
 
     document.querySelector(".button-start").addEventListener("click", () => {
-      if (!this.targetGameboard.working) {
+      if (this.gameboardReady) {
         this.targetGameboard.createRandomMaze();
       }
     });
+  }
+
+  gameboardIsReady(status) {
+    switch (status) {
+      case "working":
+        this.gameboardReady = false;
+        document.querySelector(".button-start").classList.toggle('button-working')
+        break;
+      case "ready":
+        this.gameboardReady = true;
+        document.querySelector(".button-start").classList.toggle('button-working')
+        break;
+    }
   }
 }
