@@ -15,7 +15,7 @@ body {
 
 .gameboard {
   display: grid;
-  grid-template-columns: repeat(67, 1fr);
+  grid-template-columns: repeat(87, 1fr);
   place-items: center;
 }
 

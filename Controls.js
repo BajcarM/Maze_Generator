@@ -15,9 +15,10 @@ export default class Controls {
       })
       .join("");
 
-    // document.querySelector(".button-start").addEventListener("click", () => {
-    //   targetGameboard.createRandomMaze();
-      
-    // });
+    document.querySelector(".button-start").addEventListener("click", () => {
+      if (!this.targetGameboard.working) {
+        this.targetGameboard.createRandomMaze();
+      }
+    });
   }
 }

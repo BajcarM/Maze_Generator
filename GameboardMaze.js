@@ -8,6 +8,7 @@ export default class GameboardMaze {
     this.width = width;
 
     this.tilesArray = [];
+    this.working = false;
 
     document.querySelector(".gameboard").innerHTML = "";
 
@@ -21,6 +22,10 @@ export default class GameboardMaze {
   }
 
   createRandomMaze = () => {
+    this.working = true;
+    this.tilesArray.forEach((tile) => {
+      tile.switchTo("wall");
+    });
     let remainingTiles = [];
 
     for (let row = 1; row < this.rowsCount; row += 2) {
@@ -31,13 +36,9 @@ export default class GameboardMaze {
       }
     }
 
-
-
     const stackTiles = [remainingTiles[0]];
 
     let drill = setInterval(() => {
-      console.log(stackTiles);
-
       const currentTile = stackTiles.pop();
 
       this.tilesArray[currentTile].switchTo("drill-head");
@@ -82,9 +83,10 @@ export default class GameboardMaze {
 
       if (stackTiles.length === 0) {
         clearInterval(drill);
+        this.working = false;
       }
     }, 50);
 
-    this.tilesArray[this.colsCount].switchTo('path')
+    this.tilesArray[this.colsCount].switchTo("path");
   };
 }
