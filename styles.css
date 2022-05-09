@@ -23,7 +23,7 @@ body {
   box-sizing: border-box;
   height: 20px;
   width: 20px;
-  background-color: rgb(167, 167, 167);
+  /* background-color: rgb(167, 167, 167); */
   /* border: 1px solid black; */
   background-size: cover;
 }
@@ -34,14 +34,15 @@ body {
 
 .tile-path {
   background-image: url(./images/paving-white.png);
+  opacity: 30%;
 }
 
 .tile-drill-head {
-  background-color: rgb(41, 41, 41);
+  background-color: rgb(179, 39, 255);
 }
 
 .tile-drill-tail {
-  background-color: rgb(74, 74, 74);
+  background-color: rgb(84, 141, 255);
 }
 
 button {

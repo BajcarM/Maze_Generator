@@ -38,7 +38,7 @@ export default class GameboardMaze {
       }
     }
 
-    const stackTiles = [remainingTiles[0]];
+    const stackTiles = [remainingTiles.shift()];
 
     let drill = setInterval(() => {
       const currentTile = stackTiles.pop();
